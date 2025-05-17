@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cell Phones Store</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Your custom CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        i {
+            font-size: 40px;
+            background-color: aliceblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top mb-5 ">
+        <div class="container">
+            <a class="navbar-brand" href="#">Mobile Store</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#phones">Phones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#accessories">Accessories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><button class="btn btn-link" data-toggle="modal" data-target="#loginModal">Login</button></li>
+                    <li class="nav-item"><button class="btn btn-link" data-toggle="modal" data-target="#registerModal">Register</button></li>
+                    <li class="nav-item">
+                        <button class="btn btn-warning" onclick="viewCart()">View Cart (<span id="cart-count">0</span>)</button>
+                    </li>
+                
+                </ul>
+                
+                
+            </div>
+        </div>
+    </nav> -->
+
+
+
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top mb-5">
+    <div class="container">
+        <a class="navbar-brand" href="#">Mobile Store</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#phones">Phones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#accessories">Accessories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><button class="btn btn-link text-light" data-toggle="modal" data-target="#loginModal">Login</button></li>
+                <li class="nav-item"><button class="btn btn-link text-light" data-toggle="modal" data-target="#registerModal">Register</button></li>
+                <li class="nav-item">
+                    <button class="btn btn-warning" onclick="viewCart()">View Cart (<span id="cart-count">0</span>)</button>
+                </li>
+                <li class="nav-item">
+                    <button id="logoutBtn" class="btn btn-danger d-none" onclick="logout()">Logout</button>
+                </li>
+            </ul>
+            <li class="nav-item">
+                <button class="btn btn-success" onclick="placeOrder()">Order Now</button>
+            </li>
+            <div class="modal fade" id="orderModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Select Items to Order</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="orderForm">
+                                <div id="orderItemsList"></div>
+                                <button type="submit" class="btn btn-success mt-3">Confirm Order</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</nav>
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Login</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email:</label>
+                        <input type="email" id="loginEmail" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password:</label>
+                        <input type="password" id="loginPassword" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Register Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Register</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="registerEmail">Email:</label>
+                        <input type="email" id="registerEmail" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Password:</label>
+                        <input type="password" id="registerPassword" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password:</label>
+                        <input type="password" id="confirmPassword" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    
+    <!-- Hero Section -->
+    <section class="hero bg-primary py-5 mt-5">
+        <div class="container text-center">
+            <h1 class="text-light">Welcome to Mobile Store</h1>
+            <p class="text-light" style="font-size: 25px;">Explore the latest smartphones and accessories.</p>
+            <a href="#phones" class="btn btn-warning btn-lg">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Phones Section -->
+    <section id="phones" class="phones py-4">
+        <div class="container">
+            <h2 class=" text-center text-danger ">Latest Phones</h2>
+            <div class="row">
+                <!-- Sample Phone Card -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://subkuz.com/uploads/news/2025/03/sub17417575806442.webp" height="350px" class="card-img-top" alt="Phone Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Phone Model 1</h5>
+                            <p class="card-text"> <b> Google Pixel 9a </b>
+                                Priced at $499, the Pixel 9a offers a 6.3-inch pOLED display with a 120-Hz refresh rate, a 5,100-mAh battery, the Tensor G4 processor, 8 GB RAM, and a 48-MP primary camera.</p>
+                                <a href="#" class="btn btn-primary" onclick="addToCart('Google Pixel 9a', 499)">ADD TO CART</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://awsar-dst.in/wp-content/uploads/2024/10/samsung-galaxy-s25-ultra.webp" height="350px" class="card-img-top" alt="Phone Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Phone Model 2</h5>
+                            <p class="card-text"> <b>  Samsung Galaxy S25 Ultra </b>
+                                This flagship device features a 6.9-inch display, multiple cameras, and a built-in stylus. It offers a comprehensive set of features for users seeking a high-end smartphone experience</p>
+                                <a href="#" class="btn btn-primary" onclick="addToCart('Samsung Galaxy S25 Ultra ', 499)">ADD TO CART</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://m.media-amazon.com/images/I/71N4hshhfNL._AC_UF1000,1000_QL80_.jpg" height="350px" class="card-img-top" alt="Phone Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Phone Model 3</h5>
+                            <p class="card-text">  <b>  OnePlus 13 </b>
+                                Known for its rapid charging capabilities and robust battery life, the OnePlus 13 comes with a 6.82-inch screen, an improved camera system, and strong dust and water resistance</p>
+                                <a href="#" class="btn btn-primary" onclick="addToCart('OnePlus 13', 499)">ADD TO CART</a>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more phone cards here -->
+            </div>
+        </div>
+    </section>
+    <section id="phones" class="phones py-4">
+        <div class="container">
+            
+            <div class="row">
+                <!-- Sample Phone Card -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://www.91-cdn.com/hub/wp-content/uploads/2024/08/Xiaomi-14-Ultra-3.jpg" height="350px" class="card-img-top" alt="Phone Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Phone Model 4</h5>
+                            <p class="card-text">   <b>   Xiaomi 15 Ultra  </b>
+                                This device is equipped with a Qualcomm Snapdragon 8 Elite processor, a 6.73-inch WQHD+ LTPO quad-curved AMOLED display with a 120 Hz refresh rate, and a 50MP+50MP+200MP+50MP rear camera setup. It also features a 5,410 mAh battery. </p>
+                                <a href="#" class="btn btn-primary" onclick="addToCart('  Xiaomi 15 Ultra ', 499)">ADD TO CART</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://suprememobiles.in/cdn/shop/files/Nothingr3a-6.77inches.webp?v=1741686510" height="350px" class="card-img-top" alt="Phone Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Phone Model 5</h5>
+                            <p class="card-text"> 
+                              <b>  Nothing Phone 3a Pro </b>
+Featuring a 6.77-inch Full HD+ flexible LTPS 10-bit AMOLED display with a 120 Hz refresh rate, the Nothing Phone 3a Pro is powered by the Qualcomm Snapdragon 7s Gen 3 processor. It includes a 50MP+50MP+8MP rear camera setup and a 5,000 mAh battery
+                            </p>
+                            
+                            <a href="#" class="btn btn-primary" onclick="addToCart(' Nothing Phone 3a Pro ', 499)">ADD TO CART</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://images.samsung.com/my/smartphones/galaxy-s25-ultra/buy/product_color_gray_PC.png" height="350px" class="card-img-top" alt="Phone Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Phone Model 6</h5>
+                            <p class="card-text">  <b>  iPhone 15 Pro Max </b>
+                                Display: 6.9-inch Dynamic AMOLED 2X, 144Hz refresh rate
+                                🔹 Processor: Snapdragon 8 Gen 3 / Exynos 2400
+                                🔹 Cameras: 200MP (main) + 50MP (ultra-wide) + 50MP (5x telephoto) + 10MP (3x telephoto)
+                                🔹 Battery: 5,500mAh, 65W fast charging
+                              
+                            </p>
+                            <a href="#" class="btn btn-primary" onclick="addToCart('iPhone 15 Pro Max', 499)">ADD TO CART</a>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more phone cards here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Accessories Section -->
+    <section id="accessories" class="accessories py-3">
+        <div class="container">
+            <h2  class=" text-center text-danger ">Accessories</h2>
+            <div class="row">
+                <!-- Sample Accessory Card -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://zapvi.in/wp-content/uploads/2025/03/zapvi-3-in-1-cable-2-510x680-1-247x329.jpg" height="350px" class="card-img-top" alt="Accessory Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Accessory 1</h5>
+                            <p class="card-text">Mobile Accessories- All Types Mobile Accessories
+
+                                Mobile Chargers,Batteries,Headphone,Handfree,Data Cable,tempered glass for all
+                                models,OTG, Power Bank,Back Cover,Ring Stand,Bluetooth Speakers,Selfie Stick and many
+                                more.</p>
+                                <a href="#" class="btn btn-primary" onclick="addToCart('Accessory 1', 499)">ADD TO CART</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://mate.net.in/public/uploads/all/UsReqZvujmEjMUb27qlTtRcCG8Pf18SyULO4HW7U.jpg" height="350px" class="card-img-top" alt="Accessory Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Accessory 2</h5>
+                            <p class="card-text">Mobile Accessories- All Types Mobile Accessories
+
+                                Mobile Chargers,Batteries,Headphone,Handfree,Data Cable,tempered glass for all
+                                models,OTG, Power Bank,Back Cover,Ring Stand,Bluetooth Speakers,Selfie Stick and many
+                                more.</p>
+                                <a href="#" class="btn btn-primary" onclick="addToCart('Accessory 2', 499)">ADD TO CART</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://t3.ftcdn.net/jpg/02/73/31/68/360_F_273316816_N9164vXl3NTl1W50Z3o2ocQmtjBAAPOO.jpg" height="350px" class="card-img-top" alt="Accessory Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Accessory 3</h5>
+                            <p class="card-text">Mobile Accessories- All Types Mobile Accessories
+
+                                Mobile Chargers,Batteries,Headphone,Handfree,Data Cable,tempered glass for all
+                                models,OTG, Power Bank,Back Cover,Ring Stand,Bluetooth Speakers,Selfie Stick and many
+                                more.</p>
+                                <a href="#" class="btn btn-primary" onclick="addToCart('Accessory 3', 499)">ADD TO CART</a>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more accessory cards here -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Accessories Section -->
+    <section id="accessories" class="accessories py-3">
+        <div class="container">
+          
+            <div class="row">
+                <!-- Sample Accessory Card -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://gorillagadgets.com/cdn/shop/products/3-in-1-wireless-charging-main-image-1_600x.jpg?v=1649705102" height="350px" class="card-img-top" alt="Accessory Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Accessory 4</h5>
+                            <p class="card-text">Mobile Accessories- All Types Mobile Accessories
+
+                                Mobile Chargers,Batteries,Headphone,Handfree,Data Cable,tempered glass for all
+                                models,OTG, Power Bank,Back Cover,Ring Stand,Bluetooth Speakers,Selfie Stick and many
+                                more.</p>
+                                <a href="#" class="btn btn-primary" onclick="addToCart('Accessory 4')">ADD TO CART</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://www.best10mobileaccessories.in/wp-content/uploads/2024/12/best10mobileaccessories-1024x585.png" height="350px" class="card-img-top" alt="Accessory Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Accessory 5</h5>
+                            <p class="card-text">Mobile Accessories- All Types Mobile Accessories
+
+                                Mobile Chargers,Batteries,Headphone,Handfree,Data Cable,tempered glass for all
+                                models,OTG, Power Bank,Back Cover,Ring Stand,Bluetooth Speakers,Selfie Stick and many
+                                more.</p>
+                                <a href="#" class="btn btn-primary" onclick="addToCart('Accessory 5', 499)">ADD TO CART</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://static.beebom.com/wp-content/uploads/2020/08/multi.jpg" height="350px" class="card-img-top" alt="Accessory Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Accessory 6</h5>
+                            <p class="card-text">Mobile Accessories- All Types Mobile Accessories
+
+                                Mobile Chargers,Batteries,Headphone,Handfree,Data Cable,tempered glass for all
+                                models,OTG, Power Bank,Back Cover,Ring Stand,Bluetooth Speakers,Selfie Stick and many
+                                more.</p>
+                                <a href="#" class="btn btn-primary" onclick="addToCart('Accessory 6', 499)">ADD TO CART</a>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more accessory cards here -->
+            </div>
+        </div>
+    </section>
+
+
+<!-- Order Modal -->
+
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact py-5">
+        <div class="container">
+          
+            <div class="row">
+                <div class="container mt-5">
+                    <h2 class="text-center   text-danger ">Contact Us</h2>
+                    <form id="contactForm">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message:</label>
+                            <textarea class="form-control" id="message" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <h3>Contact Details</h3>
+                    <p><strong>Address:</strong> 123 Shipping Lane, City, Country</p>
+                    <p><strong>Email:</strong> info@cellphonesstore.com</p>
+                    <p><strong>Phone:</strong> +123 456 7890</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-light text-center">
+        <div class="container">
+            <p style="font-size: 20px;">&copy; reserved by mobile stores</p>
+            <p style="font-size: 20px;">follow us on</p>
+            <a href="https://www.facebook.com/"> <i class="fa-brands fa-facebook text-primary" ></i></a> 
+           <a href="https://www.instagram.com/accounts/login/?hl=en"> <i class="fa-brands fa-square-instagram text-danger"></i></a> 
+            <a href="https://www.linkedin.com/login"><i class="fa-brands fa-square-twitter text-primary"></i></a> 
+
+
+        </div>
+    </footer>
+
+  
+
+
+  <script src="mobile.js"></script>  
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
